@@ -1,0 +1,27 @@
+
+server:
+  port: 8002
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 720000
+
+ribbon:
+  ReadTimeout: 720000
+  ConnectTimeout: 720000
+
+spring:
+  application:
+    name: manage-service

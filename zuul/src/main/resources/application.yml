@@ -1,0 +1,39 @@
+
+server:
+  port: 8001
+spring:
+  application:
+    name: zuul-gateway
+
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+
+
+
+zuul:
+  host:
+    socket-timeout-millis: 720000
+    connect-timeout-millis: 720000
+    max-total-connections: 2000
+    max-per-route-connections: 2000
+  #  ribbon-isolation-strategy: thread
+  semaphore:
+    max-semaphores: 2000
+
+hystrix:
+  command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 60000
+
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
