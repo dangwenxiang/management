@@ -2,6 +2,7 @@
 server:
   port: 8002
 
+
 eureka:
   client:
     registerWithEureka: true
@@ -25,3 +26,9 @@ ribbon:
 spring:
   application:
     name: manage-service
+
+
+  mvc:
+    favicon:
+      enabled: true
+
