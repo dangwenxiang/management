@@ -19,7 +19,6 @@ public class ManageApplication {
     private static final String SERVER_PORT = "server.port";
 
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication.run(ManageApplication.class, args);
         SpringApplication app = new SpringApplication(ManageApplication.class);
         Environment env = app.run(args).getEnvironment();
         log.info("\n----------------------------------------------------------\n\t" +
