@@ -1,5 +1,6 @@
 package com.example.manage.config;
 
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -28,13 +29,15 @@ public class SwaggerUI {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("cn.example.manage"))
                 .paths(PathSelectors.any())
+                //过滤错误api
+                .paths(Predicates.not(PathSelectors.regex("/basic-error.*")))
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("图书管理系统业务域服务 APIs")
-                .description("图书管理系统业务域服务 APIs")
+                .title("图书管理用户管理服务 APIs")
+                .description("图书管理系统用户管理服务 APIs")
                 .version("0.0.1-SNAPSHOT")
                 .build();
     }
