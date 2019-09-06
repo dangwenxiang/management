@@ -1,5 +1,6 @@
 package com.example.manage;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +17,7 @@ import java.net.UnknownHostException;
 @EnableDiscoveryClient
 @ComponentScan(basePackages = {"com.example.manage"})
 @EnableSwagger2
+@MapperScan(basePackages = "com.example.manage.mapper")
 public class ManageApplication {
     private static final Logger log = LoggerFactory.getLogger(ManageApplication.class);
     private static final String SERVER_PORT = "server.port";
