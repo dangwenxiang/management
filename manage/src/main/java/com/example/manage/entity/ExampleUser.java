@@ -20,12 +20,24 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ApiModel("用户")
-public class ExampleUser extends BaseEntity{
+public class ExampleUser extends BaseEntity {
     @ApiModelProperty(value = "用户姓名")
     private String userName;
 
     @ApiModelProperty(value = "用户密码")
     private String userPassword;
+
+    @ApiModelProperty(value = "用户状态", notes = "0-正常，1-暂停使用")
+    private Integer userStatus;
+
+    @ApiModelProperty(value = "用户手机号")
+    private String userPhone;
+
+    @ApiModelProperty(value = "用户邮箱")
+    private String userEmail;
+
+
+
 
 
 }

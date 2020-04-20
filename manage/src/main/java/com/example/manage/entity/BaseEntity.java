@@ -32,6 +32,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Data
 @ApiModel
@@ -42,6 +43,26 @@ public abstract class BaseEntity implements java.io.Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(value = "主键ID", notes = "主键ID")
     private Long id;
+
+    @ApiModelProperty(value = "操作时间")
+    private Date operateTime;
+
+    @ApiModelProperty(value = "操作人")
+    private Integer operator;
+
+    @ApiModelProperty(value = "操作人名称")
+    private String operatorName;
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    @ApiModelProperty(value = "创建人")
+    private Integer createMan;
+
+    @ApiModelProperty(value = "创建人名称")
+    private String createName;
+
+
 
 
 }

@@ -36,10 +36,4 @@ public class AccessFilter extends ZuulFilter {
 
         return null;
     }
-
-    public static void main(String[] args) {
-        Integer a= 120, b =120, c= 200, d = 200;
-        System.out.println(a == b);
-        System.out.println(c==d);
-    }
 }

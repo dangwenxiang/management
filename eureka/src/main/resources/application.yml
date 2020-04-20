@@ -4,12 +4,19 @@ server:
 spring:
   application:
     name: eureka-service
+
 eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
             defaultZone: http://localhost:8000/eureka/
+
+    security:
+      basic:
+        #关闭安全验证
+        enabled: false
+
 
 
 

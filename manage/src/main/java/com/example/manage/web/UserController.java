@@ -3,8 +3,10 @@ package com.example.manage.web;
 import com.example.manage.entity.ExampleUser;
 import com.example.manage.mapper.ExampleUserMapper;
 import com.example.manage.model.UserModel;
+import com.example.manage.utils.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +28,9 @@ public class UserController {
     @Resource
     private ExampleUserMapper exampleUserMapper;
 
-    @GetMapping(value = "getUsers")
+    @GetMapping(value = "/getUsers")
     @ApiOperation(value = "获取用户")
-    public ResponseEntity<List<ExampleUser>> getUsers(){
+    public ResponseEntity<List<ExampleUser>> getUsers() {
         List<ExampleUser> userModels = exampleUserMapper.selectAll();
         return ResponseEntity.ok().body(userModels);
     }
@@ -36,12 +38,18 @@ public class UserController {
     /**
      * 新增用户
      */
-    @PostMapping(value = "createUser")
+    @PostMapping(value = "/createUser")
     @ApiOperation(value = "新增用户")
-    public ResponseEntity<Void> createUser(@RequestBody UserModel userModel){
+    public ResponseEntity<Void> createUser(@RequestBody UserModel userModel) throws Exception {
         ExampleUser user = new ExampleUser();
+        //进行唯一性校验
         user.setUserName(userModel.getUserName());
-        user.setUserPassword(userModel.getUserPassword());
+        ExampleUser findUser = exampleUserMapper.selectOne(user);
+        if (Objects.nonNull(findUser)) {
+            throw new Exception("用户名重复，请重新输入");
+        }
+        //进行加密
+        user.setUserPassword(MD5.MD5Encode(userModel.getUserPassword()));
         exampleUserMapper.insert(user);
         return ResponseEntity.ok().body(null);
     }
@@ -49,15 +57,34 @@ public class UserController {
     /**
      * 更新用户
      */
-    @PostMapping(value = "updateUser")
+    @PostMapping(value = "/updateUser")
     @ApiOperation(value = "更新用户")
-    public ResponseEntity<Void> updateUser(@RequestBody UserModel userModel ){
+    public ResponseEntity<Void> updateUser(@RequestBody UserModel userModel) throws Exception {
         ExampleUser user = exampleUserMapper.selectByPrimaryKey(userModel.getUserId());
-        if (Objects.nonNull(user)){
-            BeanUtils.copyProperties(userModel,user);
+        if (Objects.nonNull(user)) {
+            if (Objects.equals(user.getUserName(), userModel.getUserName())) {
+                throw new Exception("用户名重复，请重新输入");
+            }
+            BeanUtils.copyProperties(userModel, user);
             exampleUserMapper.updateByPrimaryKey(user);
         }
         return ResponseEntity.ok().body(null);
+    }
+
+    /**
+     * 用户状态更改
+     */
+    @PostMapping(value = "/updateUserStatus")
+    @ApiOperation(value = "用户状态更改")
+    public ResponseEntity<Void> updateUserStatus(@RequestBody UserModel userModel) {
+        ExampleUser user = exampleUserMapper.selectByPrimaryKey(userModel.getUserId());
+        if (Objects.nonNull(user)) {
+            user.setUserStatus(userModel.getUserStatus());
+            exampleUserMapper.updateByPrimaryKey(user);
+        }
+
+        return ResponseEntity.ok().body(null);
+
     }
 
 
