@@ -1,9 +1,11 @@
+package com.example.manage;
+
 /**
  * @program: pangolin
  * @author: dwx
  * @create: 2019-08-28 11:29
  **/
-public class Singleton {
+public class Singleton{
     //手写单例模式
     //饿汉模式
     private static Singleton singleton = new Singleton();

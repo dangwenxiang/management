@@ -1,5 +1,6 @@
 package com.example.manage.web;
 
+import com.example.manage.auth.TokenManager;
 import com.example.manage.entity.ExampleUser;
 import com.example.manage.mapper.ExampleUserMapper;
 import com.example.manage.model.LoginReqModel;
@@ -8,6 +9,7 @@ import com.example.manage.utils.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class LoginController {
     private ExampleUserMapper exampleUserMapper;
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private TokenManager tokenManager;
     /**
      * 1.密码
      * 2.验证码
@@ -53,9 +55,10 @@ public class LoginController {
         if (!Objects.equals(MD5.MD5Encode(loginReqModel.getUserPassword()),findUser.getUserPassword())){
             throw new Exception("用户登录密码错误，请核对后再重新登录");
         }
-        //通过redis进行token校验
+        //生成token，保存至redis
+        String token = tokenManager.createToken(user);
         //TODO 资源获取
-        return ResponseEntity.ok().body(null);
+        return ResponseEntity.ok().body(token);
     }
 
     /**

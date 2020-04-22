@@ -1,13 +1,16 @@
 package com.example.manage.web;
 
+import com.example.manage.auth.TokenManager;
 import com.example.manage.entity.ExampleUser;
 import com.example.manage.mapper.ExampleUserMapper;
 import com.example.manage.model.UserModel;
+import com.example.manage.utils.Constants;
 import com.example.manage.utils.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +31,9 @@ public class UserController {
     @Resource
     private ExampleUserMapper exampleUserMapper;
 
+    @Autowired
+    private TokenManager tokenManager;
+
     @GetMapping(value = "/getUsers")
     @ApiOperation(value = "获取用户")
     public ResponseEntity<List<ExampleUser>> getUsers() {
@@ -40,7 +46,8 @@ public class UserController {
      */
     @PostMapping(value = "/createUser")
     @ApiOperation(value = "新增用户")
-    public ResponseEntity<Void> createUser(@RequestBody UserModel userModel) throws Exception {
+    public ResponseEntity<Void> createUser(@RequestBody UserModel userModel,@RequestHeader(Constants.AUTHORIZATION) String authorization ) throws Exception {
+        ExampleUser exampleUser = tokenManager.getAuthUser(authorization);
         ExampleUser user = new ExampleUser();
         //进行唯一性校验
         user.setUserName(userModel.getUserName());
