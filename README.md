@@ -1,5 +1,5 @@
 # management
-图书管理系统
+医疗管理系统
 Springboot 2.0.4RELEASE  springcloud  Finchley SR1
 # 技术选型
 # 1.springboot
