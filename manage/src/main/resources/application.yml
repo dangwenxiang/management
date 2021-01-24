@@ -86,4 +86,4 @@ pagehelper:
     reasonable: false
     supportMethodsArguments: true
     params: count=countSql
-debug: true
+debug: false

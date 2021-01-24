@@ -25,15 +25,3 @@ zuul:
   semaphore:
     max-semaphores: 2000
 
-hystrix:
-  command:
-      default:
-        execution:
-          isolation:
-            thread:
-              timeoutInMilliseconds: 60000
-
-
-ribbon:
-  ReadTimeout: 60000
-  ConnectTimeout: 60000
