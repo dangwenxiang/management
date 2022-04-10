@@ -32,7 +32,10 @@ spring:
         enabled: true
       livereload:
         enabled: false
-
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+      cluster-name: elasticsearch-dwx
   mvc:
     favicon:
       enabled: true

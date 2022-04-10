@@ -8,6 +8,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -23,6 +24,7 @@ import java.net.UnknownHostException;
 @EnableAsync
 @ComponentScan(basePackages = "com.example.manage")
 @MapperScan(basePackages = "com.example.manage.mapper")
+@EnableElasticsearchRepositories(basePackages = "com.example.manage.elastic")
 public class ManageApplication {
     private static final Logger log = LoggerFactory.getLogger(ManageApplication.class);
     private static final String SERVER_PORT = "server.port";

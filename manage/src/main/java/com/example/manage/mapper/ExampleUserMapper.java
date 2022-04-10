@@ -1,6 +1,6 @@
 package com.example.manage.mapper;
 
-import com.example.manage.entity.ExampleUser;
+import com.example.manage.elastic.ExampleUser;
 import com.example.manage.utils.MyMapper;
 
 /**

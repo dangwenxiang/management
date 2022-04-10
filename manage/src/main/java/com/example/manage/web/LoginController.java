@@ -1,17 +1,14 @@
 package com.example.manage.web;
 
 import com.example.manage.auth.TokenManager;
-import com.example.manage.entity.ExampleUser;
+import com.example.manage.elastic.ExampleUser;
 import com.example.manage.mapper.ExampleUserMapper;
 import com.example.manage.model.LoginReqModel;
 import com.example.manage.model.UpdatePasswordModel;
 import com.example.manage.utils.MD5;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Objects;
 
 /**

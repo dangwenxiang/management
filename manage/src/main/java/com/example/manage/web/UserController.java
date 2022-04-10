@@ -1,14 +1,13 @@
 package com.example.manage.web;
 
 import com.example.manage.auth.TokenManager;
-import com.example.manage.entity.ExampleUser;
+import com.example.manage.elastic.ExampleUser;
 import com.example.manage.mapper.ExampleUserMapper;
 import com.example.manage.model.UserModel;
 import com.example.manage.utils.Constants;
 import com.example.manage.utils.MD5;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
